@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: stg_moedas
+    description: "Moedas padronizadas provenientes do BCB."
+
+    columns:
+      - name: moeda
+        description: "Código padronizado da moeda."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: nome_moeda
+        description: "Nome descritivo da moeda."
+        data_tests:
+          - not_null
+
+  - name: stg_cotacoes
+    description: "Cotações de compra das moedas provenientes da API PTAX do Banco Central."
+
+    columns:
+      - name: moeda
+        description: "Código padronizado da moeda, como USD, EUR ou GBP."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_moedas')
+                field: moeda
+
+      - name: data_hora_cotacao
+        description: "Data e hora de referência da cotação publicada pelo BCB."
+        data_tests:
+          - not_null
+
+      - name: valor_cotacao
+        description: "Valor da cotação de compra da moeda em reais."
+        data_tests:
+          - not_null
