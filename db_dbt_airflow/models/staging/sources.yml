@@ -1,0 +1,49 @@
+version: 2
+
+sources:
+  - name: landingzone
+    description: "Dados provenientes da API PTAX do Banco Central."
+    database: databricks_dbt_airflow
+    schema: db_dbt_airflow
+
+    tables:
+
+      # ============================================
+      # MOEDAS
+      # ============================================
+      - name: src_moedas
+        description: "Cadastro de moedas disponibilizado pelo BCB."
+
+        columns:
+          - name: NomeMoeda
+            description: "Nome descritivo da moeda."
+            data_tests:
+              - not_null
+
+          - name: Moeda
+            description: "Código da moeda, como USD, EUR ou GBP."
+            data_tests:
+              - not_null
+              - unique
+
+      # ============================================
+      # COTAÇÕES
+      # ============================================
+      - name: src_cotacoes
+        description: "Cotações de compra de moedas disponibilizadas pela API PTAX."
+
+        columns:
+          - name: cotacaoCompra
+            description: "Valor da cotação de compra."
+            data_tests:
+              - not_null
+
+          - name: dataHoraCotacao
+            description: "Data e hora de referência da cotação."
+            data_tests:
+              - not_null
+
+          - name: moeda
+            description: "Código da moeda correspondente à cotação."
+            data_tests:
+              - not_null
