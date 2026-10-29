@@ -1,0 +1,40 @@
+
+# Git e arquivos locais
+.git/
+.DS_Store
+
+# Credenciais e variáveis de ambiente
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+dbt_venv/
+
+# Astro CLI
+.astro/
+astro
+airflow_settings.yaml
+
+# Airflow
+logs/
+airflow-webserver.pid
+webserver_config.py
+airflow.cfg
+airflow.db
+
+# dbt
+**/target/
+**/dbt_packages/
+**/logs/
+
+# Arquivos temporários
+*.log
+*.tmp
